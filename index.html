@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>It's a Prank 💜</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Great+Vibes&display=swap" rel="stylesheet">
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(135deg, #c299ff, #e0b3ff);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-family: 'Poppins', sans-serif;
+    overflow: hidden;
+    text-align: center;
+  }
+
+  h1 {
+    color: #fff;
+    font-family: 'Great Vibes', cursive;
+    font-size: 3rem;
+    margin-bottom: 20px;
+    animation: float 3s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0); }
+  }
+
+  .letter {
+    width: 220px;
+    height: 150px;
+    background: #fff;
+    border-radius: 10px;
+    position: relative;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+
+  .letter:hover {
+    transform: scale(1.05);
+  }
+
+  .flap {
+    width: 0;
+    height: 0;
+    border-left: 110px solid transparent;
+    border-right: 110px solid transparent;
+    border-bottom: 75px solid #d1a3ff;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 8px 8px 0 0;
+  }
+
+  .paper {
+    display: none;
+    position: absolute;
+    top: -10px;
+    left: 15px;
+    width: 190px;
+    height: 130px;
+    background: #fff;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    color: #5a2e8a;
+    overflow: auto;
+    font-weight: 500;
+    opacity: 0;
+    transition: opacity 1s ease;
+  }
+
+  .confetti {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    background: var(--c);
+    top: 0;
+    left: 50%;
+    opacity: 0.9;
+    animation: confettiFall 3s linear forwards;
+    z-index: 5;
+  }
+
+  @keyframes confettiFall {
+    0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(800px) rotate(720deg); opacity: 0; }
+  }
+
+  .heart {
+    position: fixed;
+    color: #ff99cc;
+    font-size: 20px;
+    animation: heartFall 5s linear infinite;
+    opacity: 0.8;
+    z-index: 0;
+  }
+
+  @keyframes heartFall {
+    0% { transform: translateY(-10px) scale(1); opacity: 0.8; }
+    100% { transform: translateY(100vh) scale(1.5); opacity: 0; }
+  }
+
+  audio { display: none; }
+</style>
+</head>
+<body>
+
+<h1>It's a Prank 💜</h1>
+<p style="color:white;">Click the letter below, love.</p>
+
+<div class="letter" id="letter">
+  <div class="flap"></div>
+  <div class="paper" id="paper">
+    Hi love 💌<br><br>
+    I’m so sorry for making you mad earlier 😢  
+    It was just a prank — I didn’t mean to upset you.  
+    I just find you so *adorably cute* when you’re mad,  
+    I couldn’t resist teasing you a bit.  
+    <br><br>
+    You mean the world to me 💜  
+    Please don’t stay mad, okay?  
+    I love you so, so much. 💖  
+    <br><br>
+    — Yours always 💌
+  </div>
+</div>
+
+<!-- Optional background music -->
+<audio autoplay loop src="uni.mp3"></audio> 
+
+<script>
+  // Confetti pop on page load
+  window.addEventListener('load', () => {
+    for (let i = 0; i < 80; i++) {
+      const c = document.createElement('div');
+      c.classList.add('confetti');
+      c.style.left = Math.random() * 100 + 'vw';
+      c.style.background = `hsl(${Math.random()*360}, 80%, 70%)`;
+      c.style.animationDuration = (2 + Math.random()*2) + 's';
+      document.body.appendChild(c);
+      setTimeout(() => c.remove(), 3000);
+    }
+    makeHearts();
+  });
+
+  // Falling hearts forever
+  function makeHearts() {
+    setInterval(() => {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.textContent = '💖';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.fontSize = (15 + Math.random() * 20) + 'px';
+      heart.style.animationDuration = (4 + Math.random() * 3) + 's';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 7000);
+    }, 200);
+  }
+
+  // Reveal message when clicked
+  const letter = document.getElementById('letter');
+  const paper = document.getElementById('paper');
+  let opened = false;
+
+  letter.addEventListener('click', () => {
+    if (!opened) {
+      paper.style.display = 'block';
+      setTimeout(() => { paper.style.opacity = 1; }, 100);
+      opened = true;
+    }
+  });
+</script>
+
+</body>
+</html>
